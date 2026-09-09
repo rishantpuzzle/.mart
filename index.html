@@ -5,513 +5,477 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SP Mart | Shop Everything</title>
+<title>MediaDrop — Media Downloader</title>
 
-<meta name="description" content="SP Mart - A modern multi-vendor online marketplace.">
+<meta name="description"
+content="A modern media download interface for authorized and permitted media.">
 
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
 }
 
 :root{
-    --primary:#111827;
-    --accent:#ff9900;
-    --accent2:#ffb52e;
-    --bg:#f4f6f8;
-    --white:#ffffff;
-    --text:#172033;
-    --muted:#667085;
+    --bg:#f6f8fc;
+    --card:#ffffff;
+    --text:#111827;
+    --muted:#6b7280;
     --border:#e5e7eb;
-    --green:#16a34a;
+    --primary:#635bff;
+    --primary2:#8b5cf6;
+    --success:#10b981;
+    --danger:#ef4444;
+    --shadow:0 20px 60px rgba(31,41,55,.10);
+}
+
+body.dark{
+    --bg:#0b1020;
+    --card:#121a2e;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#263149;
+    --shadow:0 20px 60px rgba(0,0,0,.35);
 }
 
 body{
+    font-family:Inter,Arial,Helvetica,sans-serif;
     background:var(--bg);
     color:var(--text);
+    min-height:100vh;
+    transition:.3s;
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
 
-.top-header{
-    background:#111827;
-    color:white;
-    height:70px;
-    display:flex;
-    align-items:center;
-    padding:0 4%;
-    gap:22px;
+header{
+    height:74px;
+    border-bottom:1px solid var(--border);
+    background:rgba(255,255,255,.75);
+    backdrop-filter:blur(15px);
     position:sticky;
     top:0;
-    z-index:1000;
+    z-index:100;
+}
+
+body.dark header{
+    background:rgba(11,16,32,.78);
+}
+
+.nav{
+    max-width:1180px;
+    height:100%;
+    margin:auto;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
 .logo{
-    min-width:150px;
-    cursor:pointer;
-}
-
-.logo h1{
-    font-size:27px;
-    letter-spacing:-1px;
-}
-
-.logo span{
-    color:#ff9900;
-}
-
-.location{
-    font-size:12px;
-    line-height:16px;
-    white-space:nowrap;
-}
-
-.location strong{
-    display:block;
-    font-size:14px;
-}
-
-/* SEARCH */
-
-.search-box{
-    flex:1;
     display:flex;
-    height:44px;
-    max-width:700px;
-}
-
-.search-category{
-    width:90px;
-    border:none;
-    background:#e5e7eb;
-    padding:0 8px;
-    outline:none;
-}
-
-.search-box input{
-    flex:1;
-    border:none;
-    outline:none;
-    padding:0 16px;
-    font-size:15px;
-}
-
-.search-btn{
-    width:52px;
-    border:none;
-    background:var(--accent);
+    align-items:center;
+    gap:10px;
     font-size:21px;
-    cursor:pointer;
+    font-weight:800;
 }
 
-.search-btn:hover{
-    background:var(--accent2);
-}
-
-.header-item{
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:12px;
-}
-
-.header-item strong{
-    display:block;
-    font-size:14px;
-}
-
-.cart{
-    font-size:27px;
-    position:relative;
-}
-
-.cart-count{
-    position:absolute;
-    top:-7px;
-    right:-9px;
-    background:#ff9900;
-    color:#111;
-    font-size:12px;
-    font-weight:bold;
-    min-width:19px;
-    height:19px;
-    border-radius:50%;
+.logo-icon{
+    width:40px;
+    height:40px;
+    border-radius:12px;
     display:flex;
+    align-items:center;
     justify-content:center;
-    align-items:center;
+    color:white;
+    font-size:20px;
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
+    box-shadow:0 8px 20px rgba(99,91,255,.25);
 }
 
-/* ================= NAV ================= */
-
-.navbar{
-    height:48px;
-    background:#1f2937;
-    color:white;
+.nav-right{
     display:flex;
     align-items:center;
-    gap:25px;
-    padding:0 4%;
-    overflow-x:auto;
+    gap:10px;
 }
 
-.navbar div{
-    white-space:nowrap;
-    font-size:14px;
+.nav-btn{
+    width:42px;
+    height:42px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    background:var(--card);
+    color:var(--text);
     cursor:pointer;
+    font-size:18px;
 }
 
-.navbar div:hover{
-    color:#ffb52e;
-}
-
-/* ================= HERO ================= */
+/* HERO */
 
 .hero{
-    margin:20px 4%;
-    min-height:340px;
-    border-radius:18px;
-    overflow:hidden;
-    background:
-        linear-gradient(90deg,rgba(0,0,0,.80),rgba(0,0,0,.35),rgba(0,0,0,.05)),
-        linear-gradient(120deg,#172554,#2563eb,#38bdf8);
-    color:white;
-    display:flex;
+    max-width:1000px;
+    margin:0 auto;
+    padding:75px 20px 35px;
+    text-align:center;
+}
+
+.badge{
+    display:inline-flex;
     align-items:center;
-    padding:45px 6%;
-    position:relative;
+    gap:7px;
+    padding:8px 14px;
+    border:1px solid rgba(99,91,255,.2);
+    background:rgba(99,91,255,.08);
+    color:var(--primary);
+    border-radius:50px;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:20px;
 }
 
-.hero-content{
-    max-width:620px;
+.badge span{
+    width:7px;
+    height:7px;
+    background:var(--success);
+    border-radius:50%;
 }
 
-.hero small{
-    color:#ffd166;
-    font-size:15px;
-    font-weight:bold;
+.hero h1{
+    font-size:clamp(38px,7vw,70px);
+    line-height:1.02;
+    letter-spacing:-2.5px;
+    margin-bottom:20px;
 }
 
-.hero h2{
-    font-size:46px;
-    margin:12px 0;
-    line-height:1.05;
+.gradient{
+    background:linear-gradient(90deg,var(--primary),var(--primary2));
+    -webkit-background-clip:text;
+    color:transparent;
 }
 
 .hero p{
-    color:#e5e7eb;
+    max-width:650px;
+    margin:auto;
+    color:var(--muted);
     font-size:17px;
-    line-height:1.6;
-    max-width:550px;
+    line-height:1.7;
 }
 
-.hero button{
-    margin-top:22px;
-    padding:13px 25px;
-    border:none;
-    border-radius:9px;
-    background:#ff9900;
-    color:#111827;
-    font-weight:bold;
+/* DOWNLOADER */
+
+.download-box{
+    max-width:850px;
+    margin:35px auto 0;
+    background:var(--card);
+    border:1px solid var(--border);
+    padding:10px;
+    border-radius:20px;
+    box-shadow:var(--shadow);
+}
+
+.input-row{
+    display:flex;
+    gap:10px;
+}
+
+.url-input{
+    flex:1;
+    height:58px;
+    border:0;
+    outline:none;
+    padding:0 18px;
     font-size:15px;
-    cursor:pointer;
+    background:transparent;
+    color:var(--text);
 }
 
-.hero button:hover{
-    background:#ffb52e;
+.url-input::placeholder{
+    color:var(--muted);
+}
+
+.paste-btn{
+    height:58px;
+    padding:0 17px;
+    border:1px solid var(--border);
+    background:var(--bg);
+    color:var(--text);
+    border-radius:14px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.download-btn{
+    height:58px;
+    padding:0 25px;
+    border:0;
+    border-radius:14px;
+    color:white;
+    cursor:pointer;
+    font-weight:800;
+    font-size:15px;
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
+    box-shadow:0 8px 20px rgba(99,91,255,.25);
+    transition:.2s;
+}
+
+.download-btn:hover{
     transform:translateY(-2px);
 }
 
-/* ================= CATEGORY ================= */
-
-.section{
-    margin:28px 4%;
-}
-
-.section-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:16px;
-}
-
-.section-header h2{
-    font-size:25px;
-}
-
-.view-all{
-    color:#2563eb;
-    cursor:pointer;
-    font-size:14px;
-    font-weight:bold;
-}
-
-.categories{
-    display:grid;
-    grid-template-columns:repeat(8,1fr);
-    gap:14px;
-}
-
-.category{
-    background:white;
-    border:1px solid var(--border);
-    border-radius:13px;
-    padding:18px 10px;
-    text-align:center;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.category:hover{
-    transform:translateY(-4px);
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-}
-
-.category-icon{
-    font-size:36px;
-    margin-bottom:9px;
-}
-
-.category p{
+.platform{
+    margin-top:13px;
+    text-align:left;
+    padding:0 8px 5px;
+    color:var(--muted);
     font-size:13px;
-    font-weight:bold;
 }
 
-/* ================= PRODUCTS ================= */
+/* RESULT */
 
-.product-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:18px;
-}
-
-.product{
-    background:white;
-    border-radius:14px;
-    overflow:hidden;
+.result{
+    display:none;
+    max-width:850px;
+    margin:20px auto;
+    background:var(--card);
     border:1px solid var(--border);
-    transition:.2s;
-    position:relative;
+    border-radius:18px;
+    padding:20px;
 }
 
-.product:hover{
-    transform:translateY(-4px);
-    box-shadow:0 10px 28px rgba(0,0,0,.09);
+.result.show{
+    display:block;
 }
 
-.product-image{
-    height:220px;
-    background:#f8fafc;
+.result-title{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.platform-icon{
+    width:45px;
+    height:45px;
+    border-radius:13px;
+    background:var(--bg);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:80px;
-    position:relative;
-}
-
-.discount{
-    position:absolute;
-    left:10px;
-    top:10px;
-    background:#dc2626;
-    color:white;
-    padding:5px 8px;
-    border-radius:5px;
-    font-size:11px;
-    font-weight:bold;
-}
-
-.wishlist{
-    position:absolute;
-    right:10px;
-    top:10px;
-    width:34px;
-    height:34px;
-    border-radius:50%;
-    border:none;
-    background:white;
-    box-shadow:0 2px 10px rgba(0,0,0,.1);
-    font-size:18px;
-    cursor:pointer;
-}
-
-.product-info{
-    padding:14px;
-}
-
-.product-name{
-    font-size:15px;
-    font-weight:bold;
-    min-height:38px;
-}
-
-.rating{
-    margin:8px 0;
-    color:#f59e0b;
-    font-size:13px;
-}
-
-.rating span{
-    color:#667085;
-}
-
-.price{
     font-size:22px;
-    font-weight:bold;
-    color:#111827;
 }
 
-.old-price{
-    text-decoration:line-through;
-    color:#98a2b3;
-    font-size:13px;
-    margin-left:6px;
+.result-info{
+    flex:1;
 }
 
-.delivery{
-    color:var(--green);
-    font-size:12px;
-    margin-top:6px;
+.result-info strong{
+    display:block;
+    margin-bottom:4px;
 }
 
-.add-cart{
-    width:100%;
-    margin-top:12px;
-    border:none;
-    background:#ff9900;
-    padding:10px;
-    border-radius:7px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.add-cart:hover{
-    background:#ffb52e;
-}
-
-/* ================= DEAL BANNER ================= */
-
-.deal-banner{
-    background:linear-gradient(100deg,#111827,#312e81);
-    color:white;
-    border-radius:16px;
-    padding:28px 35px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.deal-banner h2{
-    font-size:28px;
-}
-
-.deal-banner p{
-    margin-top:7px;
-    color:#d1d5db;
-}
-
-.deal-btn{
-    background:#ff9900;
-    color:#111827;
-    border:none;
-    padding:13px 22px;
-    border-radius:8px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-/* ================= SELLER SECTION ================= */
-
-.seller-section{
-    background:white;
-    margin:35px 4%;
-    border-radius:18px;
-    padding:35px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:30px;
-}
-
-.seller-section h2{
-    font-size:28px;
-}
-
-.seller-section p{
+.result-info small{
     color:var(--muted);
-    margin-top:8px;
-    line-height:1.5;
 }
 
-.seller-btn{
-    background:#111827;
+.result-download{
+    border:0;
+    background:var(--success);
     color:white;
-    border:none;
-    padding:14px 25px;
-    border-radius:8px;
-    font-weight:bold;
+    padding:12px 17px;
+    border-radius:10px;
     cursor:pointer;
-    white-space:nowrap;
+    font-weight:700;
 }
 
-.seller-btn:hover{
-    background:#374151;
+/* PLATFORMS */
+
+.section{
+    max-width:1180px;
+    margin:50px auto;
+    padding:0 20px;
 }
 
-/* ================= FOOTER ================= */
-
-footer{
-    margin-top:40px;
-    background:#111827;
-    color:white;
+.section-head{
+    text-align:center;
+    margin-bottom:25px;
 }
 
-.footer-top{
-    padding:40px 6%;
+.section-head h2{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+.section-head p{
+    color:var(--muted);
+}
+
+.platform-grid{
     display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr;
-    gap:35px;
+    grid-template-columns:repeat(5,1fr);
+    gap:14px;
 }
 
-.footer-col h3{
+.platform-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:22px 15px;
+    text-align:center;
+    transition:.2s;
+}
+
+.platform-card:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow);
+}
+
+.platform-card .big-icon{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.platform-card strong{
+    display:block;
+    font-size:14px;
+}
+
+.platform-card small{
+    display:block;
+    margin-top:5px;
+    color:var(--muted);
+}
+
+/* FEATURES */
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.feature{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:25px;
+}
+
+.feature-icon{
+    width:45px;
+    height:45px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:13px;
+    background:rgba(99,91,255,.1);
+    color:var(--primary);
+    font-size:20px;
     margin-bottom:15px;
 }
 
-.footer-col p,
-.footer-col div{
-    color:#cbd5e1;
+.feature h3{
+    margin-bottom:8px;
+}
+
+.feature p{
+    color:var(--muted);
+    line-height:1.6;
     font-size:14px;
-    margin:9px 0;
+}
+
+/* HISTORY */
+
+.history{
+    max-width:850px;
+    margin:40px auto 70px;
+    padding:0 20px;
+}
+
+.history-box{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.history-head{
+    padding:20px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.clear-btn{
+    border:0;
+    background:transparent;
+    color:var(--danger);
     cursor:pointer;
+    font-weight:700;
 }
 
-.footer-col div:hover{
-    color:#ffb52e;
+.history-item{
+    padding:16px 20px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    gap:13px;
 }
 
-.footer-bottom{
-    border-top:1px solid #374151;
-    padding:18px;
+.history-item:last-child{
+    border-bottom:0;
+}
+
+.history-item .url{
+    flex:1;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    font-size:14px;
+}
+
+.history-item small{
+    color:var(--muted);
+}
+
+/* NOTICE */
+
+.notice{
+    max-width:850px;
+    margin:0 auto 35px;
+    padding:16px 18px;
+    border-radius:15px;
+    background:rgba(245,158,11,.09);
+    border:1px solid rgba(245,158,11,.2);
+    color:var(--text);
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid var(--border);
+    padding:30px 20px;
     text-align:center;
-    color:#94a3b8;
+    color:var(--muted);
     font-size:13px;
 }
 
-/* ================= TOAST ================= */
+/* TOAST */
 
 .toast{
     position:fixed;
-    right:25px;
-    bottom:25px;
+    right:20px;
+    bottom:20px;
     background:#111827;
     color:white;
-    padding:14px 20px;
-    border-radius:9px;
+    padding:14px 18px;
+    border-radius:12px;
     transform:translateY(100px);
     opacity:0;
     transition:.3s;
-    z-index:2000;
+    z-index:999;
 }
 
 .toast.show{
@@ -519,133 +483,77 @@ footer{
     opacity:1;
 }
 
-/* ================= RESPONSIVE ================= */
+/* LOADER */
 
-@media(max-width:1100px){
+.loader{
+    display:none;
+    width:18px;
+    height:18px;
+    border:3px solid rgba(255,255,255,.35);
+    border-top-color:white;
+    border-radius:50%;
+    animation:spin .7s linear infinite;
+}
 
-    .categories{
-        grid-template-columns:repeat(4,1fr);
-    }
+.loading .loader{
+    display:inline-block;
+}
 
-    .product-grid{
+.loading .btn-text{
+    display:none;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg)}
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+    .platform-grid{
         grid-template-columns:repeat(3,1fr);
     }
 
-    .location{
-        display:none;
-    }
-}
-
-@media(max-width:700px){
-
-    .top-header{
-        height:auto;
-        padding:12px 4%;
-        flex-wrap:wrap;
-        gap:12px;
-    }
-
-    .logo{
-        min-width:auto;
-    }
-
-    .logo h1{
-        font-size:23px;
-    }
-
-    .search-box{
-        order:5;
-        flex-basis:100%;
-        max-width:none;
-    }
-
-    .header-item{
-        display:none;
-    }
-
-    .cart{
-        margin-left:auto;
-    }
-
-    .hero{
-        margin:12px 3%;
-        min-height:300px;
-        padding:30px;
-    }
-
-    .hero h2{
-        font-size:34px;
-    }
-
-    .hero p{
-        font-size:14px;
-    }
-
-    .categories{
-        grid-template-columns:repeat(4,1fr);
-        gap:8px;
-    }
-
-    .category{
-        padding:12px 5px;
-    }
-
-    .category-icon{
-        font-size:27px;
-    }
-
-    .product-grid{
-        grid-template-columns:repeat(2,1fr);
-        gap:10px;
-    }
-
-    .product-image{
-        height:160px;
-        font-size:60px;
-    }
-
-    .product-info{
-        padding:10px;
-    }
-
-    .product-name{
-        font-size:13px;
-    }
-
-    .price{
-        font-size:18px;
-    }
-
-    .deal-banner{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:18px;
-    }
-
-    .seller-section{
-        flex-direction:column;
-        align-items:flex-start;
-        padding:25px;
-    }
-
-    .footer-top{
-        grid-template-columns:1fr 1fr;
-        padding:30px 5%;
-    }
-}
-
-@media(max-width:420px){
-
-    .categories{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .product-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .footer-top{
+    .feature-grid{
         grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:650px){
+    .hero{
+        padding-top:50px;
+    }
+
+    .hero h1{
+        letter-spacing:-1.5px;
+    }
+
+    .input-row{
+        flex-direction:column;
+    }
+
+    .url-input,
+    .paste-btn,
+    .download-btn{
+        width:100%;
+    }
+
+    .platform-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .result-title{
+        flex-wrap:wrap;
+    }
+
+    .result-download{
+        width:100%;
+    }
+}
+
+@media(max-width:400px){
+    .platform-grid{
+        grid-template-columns:1fr 1fr;
     }
 }
 </style>
@@ -653,635 +561,624 @@ footer{
 
 <body>
 
-<!-- ================= HEADER ================= -->
+<header>
+    <div class="nav">
 
-<header class="top-header">
+        <div class="logo">
+            <div class="logo-icon">⬇</div>
+            <span>MediaDrop</span>
+        </div>
 
-    <div class="logo" onclick="goHome()">
-        <h1>SP <span>Mart</span></h1>
-    </div>
-
-    <div class="location">
-        📍 Deliver to
-        <strong>India</strong>
-    </div>
-
-    <div class="search-box">
-
-        <select class="search-category" id="categorySearch">
-            <option>All</option>
-            <option>Electronics</option>
-            <option>Fashion</option>
-            <option>Home</option>
-            <option>Beauty</option>
-            <option>Books</option>
-        </select>
-
-        <input
-            id="searchInput"
-            type="text"
-            placeholder="Search products, brands and more..."
-            onkeyup="searchProducts()"
-        >
-
-        <button class="search-btn" onclick="searchProducts()">🔍</button>
+        <div class="nav-right">
+            <button class="nav-btn" id="themeBtn" title="Toggle theme">
+                🌙
+            </button>
+        </div>
 
     </div>
-
-    <div class="header-item" onclick="login()">
-        Hello, Sign in
-        <strong>Account & Lists</strong>
-    </div>
-
-    <div class="header-item">
-        Returns
-        <strong>& Orders</strong>
-    </div>
-
-    <div class="cart" onclick="openCart()">
-        🛒
-        <span class="cart-count" id="cartCount">0</span>
-    </div>
-
 </header>
 
-<!-- ================= NAV ================= -->
 
-<nav class="navbar">
-
-    <div onclick="showAll()">☰ All</div>
-    <div onclick="showCategory('Electronics')">Electronics</div>
-    <div onclick="showCategory('Fashion')">Fashion</div>
-    <div onclick="showCategory('Home')">Home & Kitchen</div>
-    <div onclick="showCategory('Beauty')">Beauty</div>
-    <div onclick="showCategory('Books')">Books</div>
-    <div>Today's Deals</div>
-    <div>Best Sellers</div>
-    <div onclick="sellerLogin()">Sell on SP Mart</div>
-
-</nav>
-
-<!-- ================= HERO ================= -->
+<main>
 
 <section class="hero">
 
-    <div class="hero-content">
+    <div class="badge">
+        <span></span>
+        Fast & Simple Media Tool
+    </div>
 
-        <small>WELCOME TO SP MART</small>
+    <h1>
+        Save your <span class="gradient">authorized media</span>
+        easily.
+    </h1>
 
-        <h2>Everything you need.<br>All in one place.</h2>
+    <p>
+        Paste a supported media URL below and check whether the
+        content is available for authorized downloading.
+    </p>
 
-        <p>
-            Discover products from different sellers,
-            compare prices and shop easily from one marketplace.
-        </p>
 
-        <button onclick="scrollProducts()">
-            Start Shopping →
+    <div class="download-box">
+
+        <div class="input-row">
+
+            <input
+                id="urlInput"
+                class="url-input"
+                type="url"
+                placeholder="Paste a video or media URL here..."
+                autocomplete="off"
+            >
+
+            <button class="paste-btn" id="pasteBtn">
+                📋 Paste
+            </button>
+
+            <button class="download-btn" id="checkBtn">
+
+                <span class="btn-text">
+                    Check URL
+                </span>
+
+                <span class="loader"></span>
+
+            </button>
+
+        </div>
+
+        <div class="platform" id="platformText">
+            Supported platforms will be detected automatically.
+        </div>
+
+    </div>
+
+</section>
+
+
+<div class="notice">
+    <strong>⚠️ Please note:</strong>
+    Only download media that you own or have permission to download.
+    This frontend does not bypass platform restrictions or access controls.
+</div>
+
+
+<div class="result" id="result">
+
+    <div class="result-title">
+
+        <div class="platform-icon" id="resultIcon">
+            ▶️
+        </div>
+
+        <div class="result-info">
+            <strong id="resultPlatform">
+                Platform detected
+            </strong>
+
+            <small id="resultUrl">
+                URL
+            </small>
+        </div>
+
+        <button class="result-download" id="authorizedBtn">
+            Download
         </button>
 
     </div>
 
-</section>
+</div>
 
-<!-- ================= CATEGORIES ================= -->
 
 <section class="section">
 
-    <div class="section-header">
-
-        <h2>Shop by Category</h2>
-
-        <div class="view-all" onclick="showAll()">
-            View all
-        </div>
-
+    <div class="section-head">
+        <h2>Supported Platforms</h2>
+        <p>Popular platforms can be detected from their URLs.</p>
     </div>
 
-    <div class="categories">
+    <div class="platform-grid">
 
-        <div class="category" onclick="showCategory('Electronics')">
-            <div class="category-icon">📱</div>
-            <p>Electronics</p>
+        <div class="platform-card">
+            <div class="big-icon">▶️</div>
+            <strong>YouTube</strong>
+            <small>Video platform</small>
         </div>
 
-        <div class="category" onclick="showCategory('Fashion')">
-            <div class="category-icon">👕</div>
-            <p>Fashion</p>
+        <div class="platform-card">
+            <div class="big-icon">📸</div>
+            <strong>Instagram</strong>
+            <small>Social media</small>
         </div>
 
-        <div class="category" onclick="showCategory('Home')">
-            <div class="category-icon">🏠</div>
-            <p>Home</p>
+        <div class="platform-card">
+            <div class="big-icon">🔵</div>
+            <strong>Facebook</strong>
+            <small>Social media</small>
         </div>
 
-        <div class="category" onclick="showCategory('Beauty')">
-            <div class="category-icon">✨</div>
-            <p>Beauty</p>
+        <div class="platform-card">
+            <div class="big-icon">🎵</div>
+            <strong>TikTok</strong>
+            <small>Short videos</small>
         </div>
 
-        <div class="category" onclick="showCategory('Books')">
-            <div class="category-icon">📚</div>
-            <p>Books</p>
-        </div>
-
-        <div class="category">
-            <div class="category-icon">🎮</div>
-            <p>Gaming</p>
-        </div>
-
-        <div class="category">
-            <div class="category-icon">🏋️</div>
-            <p>Sports</p>
-        </div>
-
-        <div class="category">
-            <div class="category-icon">🛒</div>
-            <p>Grocery</p>
+        <div class="platform-card">
+            <div class="big-icon">𝕏</div>
+            <strong>X</strong>
+            <small>Social platform</small>
         </div>
 
     </div>
 
 </section>
 
-<!-- ================= PRODUCTS ================= -->
-
-<section class="section" id="productsSection">
-
-    <div class="section-header">
-
-        <h2 id="productTitle">Popular Products</h2>
-
-        <div class="view-all" onclick="showAll()">
-            See all
-        </div>
-
-    </div>
-
-    <div class="product-grid" id="productGrid">
-
-        <!-- PRODUCT 1 -->
-
-        <div class="product" data-category="Electronics" data-name="Wireless Headphones">
-
-            <div class="product-image">
-                🎧
-                <span class="discount">20% OFF</span>
-                <button class="wishlist">♡</button>
-            </div>
-
-            <div class="product-info">
-
-                <div class="product-name">
-                    Wireless Bluetooth Headphones
-                </div>
-
-                <div class="rating">
-                    ★★★★☆ <span>(128)</span>
-                </div>
-
-                <div class="price">
-                    ₹799
-                    <span class="old-price">₹999</span>
-                </div>
-
-                <div class="delivery">
-                    ✓ Free Delivery
-                </div>
-
-                <button class="add-cart"
-                    onclick="addToCart('Wireless Bluetooth Headphones',799)">
-                    Add to Cart
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- PRODUCT 2 -->
-
-        <div class="product" data-category="Electronics" data-name="Smart Watch">
-
-            <div class="product-image">
-                ⌚
-                <span class="discount">15% OFF</span>
-                <button class="wishlist">♡</button>
-            </div>
-
-            <div class="product-info">
-
-                <div class="product-name">
-                    Smart Fitness Watch
-                </div>
-
-                <div class="rating">
-                    ★★★★★ <span>(89)</span>
-                </div>
-
-                <div class="price">
-                    ₹1,499
-                    <span class="old-price">₹1,799</span>
-                </div>
-
-                <div class="delivery">
-                    ✓ Free Delivery
-                </div>
-
-                <button class="add-cart"
-                    onclick="addToCart('Smart Fitness Watch',1499)">
-                    Add to Cart
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- PRODUCT 3 -->
-
-        <div class="product" data-category="Fashion" data-name="Sneakers">
-
-            <div class="product-image">
-                👟
-                <span class="discount">30% OFF</span>
-                <button class="wishlist">♡</button>
-            </div>
-
-            <div class="product-info">
-
-                <div class="product-name">
-                    Comfortable Casual Sneakers
-                </div>
-
-                <div class="rating">
-                    ★★★★☆ <span>(241)</span>
-                </div>
-
-                <div class="price">
-                    ₹1,199
-                    <span class="old-price">₹1,699</span>
-                </div>
-
-                <div class="delivery">
-                    ✓ Free Delivery
-                </div>
-
-                <button class="add-cart"
-                    onclick="addToCart('Comfortable Casual Sneakers',1199)">
-                    Add to Cart
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- PRODUCT 4 -->
-
-        <div class="product" data-category="Home" data-name="Lamp">
-
-            <div class="product-image">
-                💡
-                <span class="discount">25% OFF</span>
-                <button class="wishlist">♡</button>
-            </div>
-
-            <div class="product-info">
-
-                <div class="product-name">
-                    Modern LED Table Lamp
-                </div>
-
-                <div class="rating">
-                    ★★★★☆ <span>(76)</span>
-                </div>
-
-                <div class="price">
-                    ₹599
-                    <span class="old-price">₹799</span>
-                </div>
-
-                <div class="delivery">
-                    ✓ Free Delivery
-                </div>
-
-                <button class="add-cart"
-                    onclick="addToCart('Modern LED Table Lamp',599)">
-                    Add to Cart
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- PRODUCT 5 -->
-
-        <div class="product" data-category="Books" data-name="Book">
-
-            <div class="product-image">
-                📖
-                <span class="discount">10% OFF</span>
-                <button class="wishlist">♡</button>
-            </div>
-
-            <div class="product-info">
-
-                <div class="product-name">
-                    Learn & Grow Educational Book
-                </div>
-
-                <div class="rating">
-                    ★★★★★ <span>(52)</span>
-                </div>
-
-                <div class="price">
-                    ₹349
-                    <span class="old-price">₹399</span>
-                </div>
-
-                <div class="delivery">
-                    ✓ Free Delivery
-                </div>
-
-                <button class="add-cart"
-                    onclick="addToCart('Learn & Grow Educational Book',349)">
-                    Add to Cart
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ================= DEAL ================= -->
 
 <section class="section">
 
-    <div class="deal-banner">
+    <div class="section-head">
+        <h2>Why MediaDrop?</h2>
+        <p>Simple tools with a clean experience.</p>
+    </div>
 
-        <div>
-            <h2>🔥 Deals you don't want to miss</h2>
-            <p>Great products. Great prices. Great marketplace.</p>
+    <div class="feature-grid">
+
+        <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <h3>Fast Interface</h3>
+            <p>
+                Clean and lightweight interface designed for quick
+                URL checking on desktop and mobile.
+            </p>
         </div>
 
-        <button class="deal-btn">
-            Explore Deals
-        </button>
+        <div class="feature">
+            <div class="feature-icon">📱</div>
+            <h3>Mobile Friendly</h3>
+            <p>
+                Fully responsive layout that works comfortably on
+                phones, tablets and computers.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🛡️</div>
+            <h3>Permission First</h3>
+            <p>
+                Designed around authorized downloads instead of
+                bypassing platform security or restrictions.
+            </p>
+        </div>
 
     </div>
 
 </section>
 
-<!-- ================= SELLER ================= -->
 
-<section class="seller-section">
+<section class="history">
 
-    <div>
+    <div class="history-box">
 
-        <h2>🚀 Start Selling on SP Mart</h2>
+        <div class="history-head">
+            <strong>Recent URLs</strong>
+            <button class="clear-btn" id="clearBtn">
+                Clear
+            </button>
+        </div>
 
-        <p>
-            Have products to sell? Create your seller account,
-            add your products and reach customers through SP Mart.
-        </p>
+        <div id="historyList"></div>
 
     </div>
 
-    <button class="seller-btn" onclick="sellerLogin()">
-        Become a Seller →
-    </button>
-
 </section>
 
-<!-- ================= FOOTER ================= -->
+</main>
+
 
 <footer>
-
-    <div class="footer-top">
-
-        <div class="footer-col">
-
-            <h3>SP Mart</h3>
-
-            <p>
-                A modern multi-vendor marketplace where
-                customers can discover products from
-                different sellers.
-            </p>
-
-        </div>
-
-        <div class="footer-col">
-
-            <h3>Get to Know Us</h3>
-
-            <div>About SP Mart</div>
-            <div>Careers</div>
-            <div>Contact Us</div>
-
-        </div>
-
-        <div class="footer-col">
-
-            <h3>Make Money</h3>
-
-            <div onclick="sellerLogin()">Sell on SP Mart</div>
-            <div>Seller Center</div>
-            <div>Seller Help</div>
-
-        </div>
-
-        <div class="footer-col">
-
-            <h3>Help</h3>
-
-            <div>My Account</div>
-            <div>My Orders</div>
-            <div>Shipping</div>
-            <div>Returns</div>
-
-        </div>
-
-    </div>
-
-    <div class="footer-bottom">
-        © 2026 SP Mart. All rights reserved.
-    </div>
-
+    © 2026 MediaDrop · Download only content you own or are authorized to use.
 </footer>
+
 
 <div class="toast" id="toast"></div>
 
+
 <script>
 
-let cartCount = 0;
+/* =========================
+   ELEMENTS
+========================= */
 
-/* ================= CART ================= */
+const urlInput = document.getElementById("urlInput");
+const checkBtn = document.getElementById("checkBtn");
+const pasteBtn = document.getElementById("pasteBtn");
+const platformText = document.getElementById("platformText");
 
-function addToCart(name, price){
+const result = document.getElementById("result");
+const resultIcon = document.getElementById("resultIcon");
+const resultPlatform = document.getElementById("resultPlatform");
+const resultUrl = document.getElementById("resultUrl");
+const authorizedBtn = document.getElementById("authorizedBtn");
 
-    cartCount++;
+const toast = document.getElementById("toast");
 
-    document.getElementById("cartCount").innerText = cartCount;
+const historyList = document.getElementById("historyList");
+const clearBtn = document.getElementById("clearBtn");
 
-    showToast(name + " added to cart 🛒");
-}
+const themeBtn = document.getElementById("themeBtn");
 
-function openCart(){
 
-    if(cartCount === 0){
-        showToast("Your cart is empty");
-    }else{
-        showToast("You have " + cartCount + " item(s) in cart");
+/* =========================
+   PLATFORM DETECTION
+========================= */
+
+function detectPlatform(url){
+
+    const value = url.toLowerCase();
+
+    if(
+        value.includes("youtube.com") ||
+        value.includes("youtu.be")
+    ){
+        return {
+            name:"YouTube",
+            icon:"▶️"
+        };
     }
+
+    if(
+        value.includes("instagram.com")
+    ){
+        return {
+            name:"Instagram",
+            icon:"📸"
+        };
+    }
+
+    if(
+        value.includes("facebook.com") ||
+        value.includes("fb.watch")
+    ){
+        return {
+            name:"Facebook",
+            icon:"🔵"
+        };
+    }
+
+    if(
+        value.includes("tiktok.com")
+    ){
+        return {
+            name:"TikTok",
+            icon:"🎵"
+        };
+    }
+
+    if(
+        value.includes("x.com") ||
+        value.includes("twitter.com")
+    ){
+        return {
+            name:"X",
+            icon:"𝕏"
+        };
+    }
+
+    return {
+        name:"Unknown website",
+        icon:"🌐"
+    };
 }
 
-/* ================= SEARCH ================= */
 
-function searchProducts(){
-
-    let input =
-        document.getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
-
-    let products =
-        document.querySelectorAll(".product");
-
-    let found = 0;
-
-    products.forEach(product => {
-
-        let name =
-            product.dataset.name.toLowerCase();
-
-        let category =
-            product.dataset.category.toLowerCase();
-
-        if(
-            input === "" ||
-            name.includes(input) ||
-            category.includes(input)
-        ){
-
-            product.style.display = "block";
-            found++;
-
-        }else{
-
-            product.style.display = "none";
-
-        }
-
-    });
-
-    document.getElementById("productTitle").innerText =
-        input ? "Search Results" : "Popular Products";
-
-}
-
-/* ================= CATEGORY ================= */
-
-function showCategory(category){
-
-    let products =
-        document.querySelectorAll(".product");
-
-    products.forEach(product => {
-
-        if(product.dataset.category === category){
-
-            product.style.display = "block";
-
-        }else{
-
-            product.style.display = "none";
-
-        }
-
-    });
-
-    document.getElementById("productTitle").innerText =
-        category + " Products";
-
-    document.getElementById("productsSection")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
-}
-
-function showAll(){
-
-    document.querySelectorAll(".product")
-        .forEach(product => {
-            product.style.display = "block";
-        });
-
-    document.getElementById("productTitle").innerText =
-        "Popular Products";
-
-    document.getElementById("productsSection")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
-}
-
-/* ================= LOGIN ================= */
-
-function login(){
-
-    showToast("Customer login will be connected next 🔐");
-
-}
-
-function sellerLogin(){
-
-    showToast("Seller Center will be connected next 🚀");
-
-}
-
-/* ================= HOME ================= */
-
-function goHome(){
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-}
-
-/* ================= SCROLL ================= */
-
-function scrollProducts(){
-
-    document.getElementById("productsSection")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
-
-}
-
-/* ================= TOAST ================= */
+/* =========================
+   TOAST
+========================= */
 
 function showToast(message){
 
-    let toast =
-        document.getElementById("toast");
-
-    toast.innerText = message;
+    toast.textContent = message;
 
     toast.classList.add("show");
 
-    setTimeout(() => {
-
+    setTimeout(()=>{
         toast.classList.remove("show");
+    },3000);
+}
 
-    },2500);
+
+/* =========================
+   CHECK URL
+========================= */
+
+checkBtn.addEventListener("click",()=>{
+
+    const url = urlInput.value.trim();
+
+    if(!url){
+        showToast("Please paste a URL first.");
+        urlInput.focus();
+        return;
+    }
+
+    let validURL;
+
+    try{
+        validURL = new URL(url);
+    }catch{
+        showToast("Please enter a valid URL.");
+        return;
+    }
+
+    checkBtn.classList.add("loading");
+    checkBtn.disabled = true;
+
+    setTimeout(()=>{
+
+        const platform = detectPlatform(url);
+
+        result.classList.add("show");
+
+        resultIcon.textContent = platform.icon;
+        resultPlatform.textContent = platform.name;
+        resultUrl.textContent = url;
+
+        platformText.textContent =
+            "Detected platform: " + platform.name;
+
+        saveHistory(url,platform.name);
+
+        checkBtn.classList.remove("loading");
+        checkBtn.disabled = false;
+
+        showToast(
+            platform.name === "Unknown website"
+            ? "Website detected."
+            : platform.name + " link detected."
+        );
+
+    },900);
+
+});
+
+
+/* =========================
+   AUTHORIZED DOWNLOAD
+========================= */
+
+authorizedBtn.addEventListener("click",()=>{
+
+    showToast(
+        "Connect your authorized media API/backend here."
+    );
+
+    /*
+       BACKEND INTEGRATION PLACEHOLDER
+
+       Example:
+
+       fetch("/api/download", {
+           method:"POST",
+           headers:{
+               "Content-Type":"application/json"
+           },
+           body:JSON.stringify({
+               url:urlInput.value
+           })
+       });
+
+       Your backend should only process
+       media that the user is authorized to download.
+    */
+
+});
+
+
+/* =========================
+   PASTE BUTTON
+========================= */
+
+pasteBtn.addEventListener("click",async()=>{
+
+    try{
+
+        const text =
+            await navigator.clipboard.readText();
+
+        if(!text){
+            showToast("Clipboard is empty.");
+            return;
+        }
+
+        urlInput.value = text;
+
+        showToast("URL pasted.");
+
+        urlInput.focus();
+
+    }catch{
+
+        showToast(
+            "Clipboard access is unavailable. Paste manually."
+        );
+
+    }
+
+});
+
+
+/* =========================
+   ENTER KEY
+========================= */
+
+urlInput.addEventListener("keydown",(event)=>{
+
+    if(event.key === "Enter"){
+        checkBtn.click();
+    }
+
+});
+
+
+/* =========================
+   HISTORY
+========================= */
+
+function getHistory(){
+
+    try{
+        return JSON.parse(
+            localStorage.getItem("mediaDropHistory")
+        ) || [];
+    }catch{
+        return [];
+    }
 
 }
+
+
+function saveHistory(url,platform){
+
+    let history = getHistory();
+
+    history = history.filter(item => item.url !== url);
+
+    history.unshift({
+        url:url,
+        platform:platform,
+        time:new Date().toLocaleString()
+    });
+
+    history = history.slice(0,8);
+
+    localStorage.setItem(
+        "mediaDropHistory",
+        JSON.stringify(history)
+    );
+
+    renderHistory();
+
+}
+
+
+function renderHistory(){
+
+    const history = getHistory();
+
+    historyList.innerHTML = "";
+
+    if(history.length === 0){
+
+        historyList.innerHTML = `
+            <div style="
+                padding:25px;
+                text-align:center;
+                color:var(--muted);
+            ">
+                No recent URLs
+            </div>
+        `;
+
+        return;
+    }
+
+    history.forEach(item=>{
+
+        const div = document.createElement("div");
+
+        div.className = "history-item";
+
+        div.innerHTML = `
+            <div>🔗</div>
+
+            <div class="url">
+                <strong>${escapeHTML(item.platform)}</strong><br>
+                <span>${escapeHTML(item.url)}</span>
+            </div>
+
+            <small>
+                ${escapeHTML(item.time)}
+            </small>
+        `;
+
+        historyList.appendChild(div);
+
+    });
+
+}
+
+
+clearBtn.addEventListener("click",()=>{
+
+    localStorage.removeItem("mediaDropHistory");
+
+    renderHistory();
+
+    showToast("History cleared.");
+
+});
+
+
+/* =========================
+   HTML ESCAPE
+========================= */
+
+function escapeHTML(value){
+
+    return String(value)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+function loadTheme(){
+
+    const theme =
+        localStorage.getItem("mediaDropTheme");
+
+    if(theme === "dark"){
+
+        document.body.classList.add("dark");
+
+        themeBtn.textContent = "☀️";
+
+    }
+
+}
+
+
+themeBtn.addEventListener("click",()=>{
+
+    document.body.classList.toggle("dark");
+
+    const dark =
+        document.body.classList.contains("dark");
+
+    localStorage.setItem(
+        "mediaDropTheme",
+        dark ? "dark" : "light"
+    );
+
+    themeBtn.textContent =
+        dark ? "☀️" : "🌙";
+
+});
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+loadTheme();
+renderHistory();
 
 </script>
 
