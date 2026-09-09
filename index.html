@@ -3,12 +3,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>MediaDrop — Media Downloader</title>
-
-<meta name="description"
-content="A modern media download interface for authorized and permitted media.">
+<title>MediaDrop — Direct Media Downloader</title>
 
 <style>
 *{
@@ -18,53 +15,57 @@ content="A modern media download interface for authorized and permitted media.">
 }
 
 :root{
-    --bg:#f6f8fc;
+    --bg:#f5f7fb;
     --card:#ffffff;
     --text:#111827;
-    --muted:#6b7280;
-    --border:#e5e7eb;
+    --muted:#667085;
+    --border:#e4e7ec;
     --primary:#635bff;
     --primary2:#8b5cf6;
-    --success:#10b981;
-    --danger:#ef4444;
-    --shadow:0 20px 60px rgba(31,41,55,.10);
+    --green:#12b76a;
+    --red:#f04438;
+    --shadow:0 25px 70px rgba(16,24,40,.10);
 }
 
 body.dark{
-    --bg:#0b1020;
-    --card:#121a2e;
-    --text:#f8fafc;
-    --muted:#94a3b8;
-    --border:#263149;
-    --shadow:0 20px 60px rgba(0,0,0,.35);
+    --bg:#080d1a;
+    --card:#111827;
+    --text:#f9fafb;
+    --muted:#98a2b3;
+    --border:#263244;
+    --shadow:0 25px 70px rgba(0,0,0,.35);
 }
 
 body{
-    font-family:Inter,Arial,Helvetica,sans-serif;
-    background:var(--bg);
-    color:var(--text);
     min-height:100vh;
-    transition:.3s;
+    background:
+        radial-gradient(circle at 10% 10%,rgba(99,91,255,.10),transparent 28%),
+        radial-gradient(circle at 90% 15%,rgba(139,92,246,.10),transparent 25%),
+        var(--bg);
+    color:var(--text);
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,
+                 "Segoe UI",Arial,sans-serif;
+    transition:.25s;
 }
 
 /* HEADER */
 
 header{
-    height:74px;
-    border-bottom:1px solid var(--border);
-    background:rgba(255,255,255,.75);
-    backdrop-filter:blur(15px);
     position:sticky;
     top:0;
-    z-index:100;
+    z-index:50;
+    height:72px;
+    border-bottom:1px solid var(--border);
+    background:rgba(255,255,255,.78);
+    backdrop-filter:blur(18px);
 }
 
 body.dark header{
-    background:rgba(11,16,32,.78);
+    background:rgba(8,13,26,.80);
 }
 
 .nav{
-    max-width:1180px;
+    max-width:1150px;
     height:100%;
     margin:auto;
     padding:0 20px;
@@ -76,12 +77,12 @@ body.dark header{
 .logo{
     display:flex;
     align-items:center;
-    gap:10px;
-    font-size:21px;
-    font-weight:800;
+    gap:11px;
+    font-weight:850;
+    font-size:20px;
 }
 
-.logo-icon{
+.logo-box{
     width:40px;
     height:40px;
     border-radius:12px;
@@ -89,18 +90,11 @@ body.dark header{
     align-items:center;
     justify-content:center;
     color:white;
-    font-size:20px;
     background:linear-gradient(135deg,var(--primary),var(--primary2));
-    box-shadow:0 8px 20px rgba(99,91,255,.25);
+    box-shadow:0 10px 25px rgba(99,91,255,.28);
 }
 
-.nav-right{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.nav-btn{
+.theme{
     width:42px;
     height:42px;
     border:1px solid var(--border);
@@ -114,38 +108,37 @@ body.dark header{
 /* HERO */
 
 .hero{
-    max-width:1000px;
-    margin:0 auto;
-    padding:75px 20px 35px;
+    max-width:950px;
+    margin:auto;
     text-align:center;
+    padding:78px 20px 30px;
 }
 
 .badge{
     display:inline-flex;
     align-items:center;
-    gap:7px;
+    gap:8px;
     padding:8px 14px;
-    border:1px solid rgba(99,91,255,.2);
+    border:1px solid rgba(99,91,255,.20);
     background:rgba(99,91,255,.08);
     color:var(--primary);
     border-radius:50px;
     font-size:13px;
-    font-weight:700;
-    margin-bottom:20px;
+    font-weight:750;
 }
 
-.badge span{
+.dot{
     width:7px;
     height:7px;
-    background:var(--success);
+    background:var(--green);
     border-radius:50%;
 }
 
-.hero h1{
-    font-size:clamp(38px,7vw,70px);
-    line-height:1.02;
-    letter-spacing:-2.5px;
-    margin-bottom:20px;
+h1{
+    margin-top:22px;
+    font-size:clamp(40px,7vw,70px);
+    line-height:1.03;
+    letter-spacing:-3px;
 }
 
 .gradient{
@@ -154,23 +147,23 @@ body.dark header{
     color:transparent;
 }
 
-.hero p{
+.hero-text{
     max-width:650px;
-    margin:auto;
+    margin:20px auto 0;
     color:var(--muted);
     font-size:17px;
     line-height:1.7;
 }
 
-/* DOWNLOADER */
+/* DOWNLOAD CARD */
 
-.download-box{
-    max-width:850px;
+.downloader{
+    max-width:900px;
     margin:35px auto 0;
+    padding:11px;
     background:var(--card);
     border:1px solid var(--border);
-    padding:10px;
-    border-radius:20px;
+    border-radius:22px;
     box-shadow:var(--shadow);
 }
 
@@ -179,22 +172,27 @@ body.dark header{
     gap:10px;
 }
 
-.url-input{
+.input-wrap{
     flex:1;
-    height:58px;
-    border:0;
-    outline:none;
-    padding:0 18px;
-    font-size:15px;
-    background:transparent;
-    color:var(--text);
+    position:relative;
 }
 
-.url-input::placeholder{
+.url{
+    width:100%;
+    height:58px;
+    border:0;
+    outline:0;
+    background:transparent;
+    color:var(--text);
+    padding:0 18px;
+    font-size:15px;
+}
+
+.url::placeholder{
     color:var(--muted);
 }
 
-.paste-btn{
+.paste{
     height:58px;
     padding:0 17px;
     border:1px solid var(--border);
@@ -205,171 +203,216 @@ body.dark header{
     font-weight:700;
 }
 
-.download-btn{
+.check{
     height:58px;
-    padding:0 25px;
+    padding:0 23px;
     border:0;
     border-radius:14px;
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
     color:white;
     cursor:pointer;
     font-weight:800;
     font-size:15px;
-    background:linear-gradient(135deg,var(--primary),var(--primary2));
-    box-shadow:0 8px 20px rgba(99,91,255,.25);
-    transition:.2s;
+    min-width:125px;
 }
 
-.download-btn:hover{
-    transform:translateY(-2px);
+.check:disabled{
+    opacity:.7;
+    cursor:not-allowed;
 }
 
-.platform{
-    margin-top:13px;
+.status{
+    min-height:22px;
     text-align:left;
-    padding:0 8px 5px;
-    color:var(--muted);
+    padding:8px 8px 2px;
     font-size:13px;
+    color:var(--muted);
 }
 
 /* RESULT */
 
 .result{
     display:none;
-    max-width:850px;
+    max-width:900px;
     margin:20px auto;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:18px;
     padding:20px;
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:20px;
+    box-shadow:var(--shadow);
 }
 
 .result.show{
     display:block;
+    animation:up .35s ease;
 }
 
-.result-title{
+@keyframes up{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.result-top{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:14px;
 }
 
-.platform-icon{
-    width:45px;
-    height:45px;
-    border-radius:13px;
-    background:var(--bg);
+.media-icon{
+    width:52px;
+    height:52px;
+    border-radius:15px;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:22px;
+    font-size:25px;
+    background:var(--bg);
 }
 
 .result-info{
     flex:1;
+    min-width:0;
 }
 
 .result-info strong{
     display:block;
-    margin-bottom:4px;
+    font-size:16px;
+    margin-bottom:5px;
 }
 
-.result-info small{
+.result-url{
     color:var(--muted);
+    font-size:13px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
-.result-download{
+.download{
     border:0;
-    background:var(--success);
+    padding:13px 20px;
+    border-radius:12px;
+    background:var(--green);
     color:white;
-    padding:12px 17px;
-    border-radius:10px;
     cursor:pointer;
-    font-weight:700;
+    font-weight:800;
+    white-space:nowrap;
 }
 
-/* PLATFORMS */
+.download:hover{
+    filter:brightness(.95);
+}
+
+.download:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.preview{
+    display:none;
+    margin-top:18px;
+    border-radius:15px;
+    overflow:hidden;
+    background:#000;
+}
+
+.preview video,
+.preview audio{
+    width:100%;
+    max-height:430px;
+    display:block;
+}
+
+/* SECTION */
 
 .section{
-    max-width:1180px;
-    margin:50px auto;
+    max-width:1150px;
+    margin:55px auto;
     padding:0 20px;
 }
 
-.section-head{
+.section-title{
     text-align:center;
     margin-bottom:25px;
 }
 
-.section-head h2{
-    font-size:28px;
+.section-title h2{
+    font-size:29px;
     margin-bottom:8px;
 }
 
-.section-head p{
+.section-title p{
     color:var(--muted);
 }
 
-.platform-grid{
+/* PLATFORM CARDS */
+
+.platforms{
     display:grid;
     grid-template-columns:repeat(5,1fr);
     gap:14px;
 }
 
-.platform-card{
+.platform{
     background:var(--card);
     border:1px solid var(--border);
     border-radius:18px;
-    padding:22px 15px;
+    padding:23px 12px;
     text-align:center;
     transition:.2s;
 }
 
-.platform-card:hover{
+.platform:hover{
     transform:translateY(-4px);
     box-shadow:var(--shadow);
 }
 
-.platform-card .big-icon{
+.platform-icon{
     font-size:30px;
     margin-bottom:10px;
 }
 
-.platform-card strong{
+.platform strong{
     display:block;
-    font-size:14px;
 }
 
-.platform-card small{
+.platform small{
+    color:var(--muted);
     display:block;
     margin-top:5px;
-    color:var(--muted);
 }
 
 /* FEATURES */
 
-.feature-grid{
+.features{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:18px;
 }
 
 .feature{
+    padding:25px;
     background:var(--card);
     border:1px solid var(--border);
     border-radius:20px;
-    padding:25px;
 }
 
 .feature-icon{
-    width:45px;
-    height:45px;
+    width:46px;
+    height:46px;
     display:flex;
     align-items:center;
     justify-content:center;
     border-radius:13px;
-    background:rgba(99,91,255,.1);
+    background:rgba(99,91,255,.10);
     color:var(--primary);
-    font-size:20px;
+    font-size:21px;
     margin-bottom:15px;
 }
 
@@ -379,77 +422,89 @@ body.dark header{
 
 .feature p{
     color:var(--muted);
-    line-height:1.6;
+    line-height:1.65;
     font-size:14px;
 }
 
 /* HISTORY */
 
 .history{
-    max-width:850px;
-    margin:40px auto 70px;
+    max-width:900px;
+    margin:50px auto 75px;
     padding:0 20px;
 }
 
 .history-box{
+    overflow:hidden;
     background:var(--card);
     border:1px solid var(--border);
     border-radius:20px;
-    overflow:hidden;
 }
 
-.history-head{
-    padding:20px;
+.history-header{
+    padding:19px 20px;
     border-bottom:1px solid var(--border);
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
 }
 
-.clear-btn{
+.clear{
     border:0;
     background:transparent;
-    color:var(--danger);
+    color:var(--red);
     cursor:pointer;
-    font-weight:700;
+    font-weight:750;
 }
 
 .history-item{
-    padding:16px 20px;
-    border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
     gap:13px;
+    padding:15px 20px;
+    border-bottom:1px solid var(--border);
 }
 
 .history-item:last-child{
     border-bottom:0;
 }
 
-.history-item .url{
+.history-item .info{
     flex:1;
+    min-width:0;
+}
+
+.history-item strong{
+    font-size:13px;
+}
+
+.history-item .link{
+    display:block;
+    color:var(--muted);
+    font-size:13px;
+    margin-top:3px;
     overflow:hidden;
-    white-space:nowrap;
     text-overflow:ellipsis;
-    font-size:14px;
+    white-space:nowrap;
 }
 
 .history-item small{
     color:var(--muted);
+    white-space:nowrap;
 }
 
 /* NOTICE */
 
 .notice{
-    max-width:850px;
-    margin:0 auto 35px;
-    padding:16px 18px;
-    border-radius:15px;
-    background:rgba(245,158,11,.09);
-    border:1px solid rgba(245,158,11,.2);
+    max-width:900px;
+    margin:0 auto;
+    padding:17px 19px;
+    border:1px solid rgba(245,158,11,.25);
+    background:rgba(245,158,11,.08);
+    border-radius:16px;
     color:var(--text);
     font-size:13px;
-    line-height:1.6;
+    line-height:1.65;
 }
 
 /* FOOTER */
@@ -468,92 +523,79 @@ footer{
     position:fixed;
     right:20px;
     bottom:20px;
+    max-width:330px;
+    padding:14px 17px;
+    border-radius:13px;
     background:#111827;
-    color:white;
-    padding:14px 18px;
-    border-radius:12px;
-    transform:translateY(100px);
+    color:#fff;
     opacity:0;
-    transition:.3s;
+    transform:translateY(20px);
+    pointer-events:none;
+    transition:.25s;
     z-index:999;
+    font-size:14px;
 }
 
 .toast.show{
-    transform:translateY(0);
     opacity:1;
-}
-
-/* LOADER */
-
-.loader{
-    display:none;
-    width:18px;
-    height:18px;
-    border:3px solid rgba(255,255,255,.35);
-    border-top-color:white;
-    border-radius:50%;
-    animation:spin .7s linear infinite;
-}
-
-.loading .loader{
-    display:inline-block;
-}
-
-.loading .btn-text{
-    display:none;
-}
-
-@keyframes spin{
-    to{transform:rotate(360deg)}
+    transform:translateY(0);
 }
 
 /* RESPONSIVE */
 
 @media(max-width:850px){
-    .platform-grid{
+
+    .platforms{
         grid-template-columns:repeat(3,1fr);
     }
 
-    .feature-grid{
+    .features{
         grid-template-columns:1fr;
     }
 }
 
 @media(max-width:650px){
-    .hero{
-        padding-top:50px;
+
+    header{
+        height:65px;
     }
 
-    .hero h1{
-        letter-spacing:-1.5px;
+    .hero{
+        padding-top:52px;
+    }
+
+    h1{
+        letter-spacing:-1.8px;
     }
 
     .input-row{
         flex-direction:column;
     }
 
-    .url-input,
-    .paste-btn,
-    .download-btn{
+    .url,
+    .paste,
+    .check{
         width:100%;
     }
 
-    .platform-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .result-title{
+    .result-top{
         flex-wrap:wrap;
     }
 
-    .result-download{
+    .download{
         width:100%;
     }
-}
 
-@media(max-width:400px){
-    .platform-grid{
-        grid-template-columns:1fr 1fr;
+    .platforms{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .history-item{
+        align-items:flex-start;
+    }
+
+    .history-item small{
+        display:none;
     }
 }
 </style>
@@ -565,15 +607,13 @@ footer{
     <div class="nav">
 
         <div class="logo">
-            <div class="logo-icon">⬇</div>
+            <div class="logo-box">↓</div>
             <span>MediaDrop</span>
         </div>
 
-        <div class="nav-right">
-            <button class="nav-btn" id="themeBtn" title="Toggle theme">
-                🌙
-            </button>
-        </div>
+        <button class="theme" id="themeBtn">
+            🌙
+        </button>
 
     </div>
 </header>
@@ -584,51 +624,50 @@ footer{
 <section class="hero">
 
     <div class="badge">
-        <span></span>
-        Fast & Simple Media Tool
+        <span class="dot"></span>
+        Direct Media Downloader
     </div>
 
     <h1>
-        Save your <span class="gradient">authorized media</span>
+        Download your
+        <span class="gradient">media files</span>
         easily.
     </h1>
 
-    <p>
-        Paste a supported media URL below and check whether the
-        content is available for authorized downloading.
+    <p class="hero-text">
+        Paste a direct media URL such as an MP4, WebM, MP3 or other
+        browser-downloadable media file.
     </p>
 
 
-    <div class="download-box">
+    <div class="downloader">
 
         <div class="input-row">
 
-            <input
-                id="urlInput"
-                class="url-input"
-                type="url"
-                placeholder="Paste a video or media URL here..."
-                autocomplete="off"
-            >
+            <div class="input-wrap">
 
-            <button class="paste-btn" id="pasteBtn">
+                <input
+                    id="urlInput"
+                    class="url"
+                    type="url"
+                    placeholder="https://example.com/video.mp4"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <button class="paste" id="pasteBtn">
                 📋 Paste
             </button>
 
-            <button class="download-btn" id="checkBtn">
-
-                <span class="btn-text">
-                    Check URL
-                </span>
-
-                <span class="loader"></span>
-
+            <button class="check" id="checkBtn">
+                Check URL
             </button>
 
         </div>
 
-        <div class="platform" id="platformText">
-            Supported platforms will be detected automatically.
+        <div class="status" id="status">
+            Enter a direct media URL to begin.
         </div>
 
     </div>
@@ -637,33 +676,56 @@ footer{
 
 
 <div class="notice">
-    <strong>⚠️ Please note:</strong>
-    Only download media that you own or have permission to download.
-    This frontend does not bypass platform restrictions or access controls.
+
+    <strong>Important:</strong>
+    This tool works with direct media resources that your browser is
+    permitted to access. It does not bypass login requirements,
+    DRM, CORS restrictions, paywalls, or platform download controls.
+    Only download content you own or have permission to use.
+
 </div>
 
 
 <div class="result" id="result">
 
-    <div class="result-title">
+    <div class="result-top">
 
-        <div class="platform-icon" id="resultIcon">
-            ▶️
+        <div class="media-icon" id="mediaIcon">
+            🎬
         </div>
 
         <div class="result-info">
-            <strong id="resultPlatform">
-                Platform detected
+
+            <strong id="mediaName">
+                Media file detected
             </strong>
 
-            <small id="resultUrl">
-                URL
-            </small>
+            <div class="result-url" id="resultUrl"></div>
+
         </div>
 
-        <button class="result-download" id="authorizedBtn">
-            Download
+        <button
+            class="download"
+            id="downloadBtn"
+        >
+            ⬇ Download
         </button>
+
+    </div>
+
+
+    <div class="preview" id="preview">
+
+        <video
+            id="videoPreview"
+            controls
+            playsinline
+        ></video>
+
+        <audio
+            id="audioPreview"
+            controls
+        ></audio>
 
     </div>
 
@@ -672,41 +734,47 @@ footer{
 
 <section class="section">
 
-    <div class="section-head">
-        <h2>Supported Platforms</h2>
-        <p>Popular platforms can be detected from their URLs.</p>
+    <div class="section-title">
+
+        <h2>Supported Media</h2>
+
+        <p>
+            Common direct-media file formats supported by browsers.
+        </p>
+
     </div>
 
-    <div class="platform-grid">
 
-        <div class="platform-card">
-            <div class="big-icon">▶️</div>
-            <strong>YouTube</strong>
-            <small>Video platform</small>
+    <div class="platforms">
+
+        <div class="platform">
+            <div class="platform-icon">🎬</div>
+            <strong>MP4</strong>
+            <small>Video</small>
         </div>
 
-        <div class="platform-card">
-            <div class="big-icon">📸</div>
-            <strong>Instagram</strong>
-            <small>Social media</small>
+        <div class="platform">
+            <div class="platform-icon">🎞️</div>
+            <strong>WebM</strong>
+            <small>Video</small>
         </div>
 
-        <div class="platform-card">
-            <div class="big-icon">🔵</div>
-            <strong>Facebook</strong>
-            <small>Social media</small>
+        <div class="platform">
+            <div class="platform-icon">🎵</div>
+            <strong>MP3</strong>
+            <small>Audio</small>
         </div>
 
-        <div class="platform-card">
-            <div class="big-icon">🎵</div>
-            <strong>TikTok</strong>
-            <small>Short videos</small>
+        <div class="platform">
+            <div class="platform-icon">🔊</div>
+            <strong>WAV</strong>
+            <small>Audio</small>
         </div>
 
-        <div class="platform-card">
-            <div class="big-icon">𝕏</div>
-            <strong>X</strong>
-            <small>Social platform</small>
+        <div class="platform">
+            <div class="platform-icon">📹</div>
+            <strong>OGG</strong>
+            <small>Media</small>
         </div>
 
     </div>
@@ -716,38 +784,58 @@ footer{
 
 <section class="section">
 
-    <div class="section-head">
-        <h2>Why MediaDrop?</h2>
-        <p>Simple tools with a clean experience.</p>
+    <div class="section-title">
+
+        <h2>Simple & Powerful</h2>
+
+        <p>
+            Everything you need for direct-media downloads.
+        </p>
+
     </div>
 
-    <div class="feature-grid">
+
+    <div class="features">
 
         <div class="feature">
+
             <div class="feature-icon">⚡</div>
-            <h3>Fast Interface</h3>
+
+            <h3>Fast</h3>
+
             <p>
-                Clean and lightweight interface designed for quick
-                URL checking on desktop and mobile.
+                Lightweight single-page interface with no unnecessary
+                libraries or frameworks.
             </p>
+
         </div>
 
+
         <div class="feature">
+
             <div class="feature-icon">📱</div>
-            <h3>Mobile Friendly</h3>
+
+            <h3>Responsive</h3>
+
             <p>
-                Fully responsive layout that works comfortably on
-                phones, tablets and computers.
+                Designed to work smoothly across phones, tablets
+                and desktop browsers.
             </p>
+
         </div>
 
+
         <div class="feature">
-            <div class="feature-icon">🛡️</div>
-            <h3>Permission First</h3>
+
+            <div class="feature-icon">🔒</div>
+
+            <h3>Browser Based</h3>
+
             <p>
-                Designed around authorized downloads instead of
-                bypassing platform security or restrictions.
+                The interface runs directly in your browser without
+                requiring a separate application.
             </p>
+
         </div>
 
     </div>
@@ -759,11 +847,17 @@ footer{
 
     <div class="history-box">
 
-        <div class="history-head">
-            <strong>Recent URLs</strong>
-            <button class="clear-btn" id="clearBtn">
-                Clear
+        <div class="history-header">
+
+            <strong>Recent Downloads</strong>
+
+            <button
+                class="clear"
+                id="clearBtn"
+            >
+                Clear history
             </button>
+
         </div>
 
         <div id="historyList"></div>
@@ -776,7 +870,7 @@ footer{
 
 
 <footer>
-    © 2026 MediaDrop · Download only content you own or are authorized to use.
+    © 2026 MediaDrop · Use only for authorized media.
 </footer>
 
 
@@ -785,95 +879,66 @@ footer{
 
 <script>
 
-/* =========================
+/* =========================================
    ELEMENTS
-========================= */
+========================================= */
 
-const urlInput = document.getElementById("urlInput");
-const checkBtn = document.getElementById("checkBtn");
-const pasteBtn = document.getElementById("pasteBtn");
-const platformText = document.getElementById("platformText");
+const urlInput =
+    document.getElementById("urlInput");
 
-const result = document.getElementById("result");
-const resultIcon = document.getElementById("resultIcon");
-const resultPlatform = document.getElementById("resultPlatform");
-const resultUrl = document.getElementById("resultUrl");
-const authorizedBtn = document.getElementById("authorizedBtn");
+const pasteBtn =
+    document.getElementById("pasteBtn");
 
-const toast = document.getElementById("toast");
+const checkBtn =
+    document.getElementById("checkBtn");
 
-const historyList = document.getElementById("historyList");
-const clearBtn = document.getElementById("clearBtn");
+const statusBox =
+    document.getElementById("status");
 
-const themeBtn = document.getElementById("themeBtn");
+const result =
+    document.getElementById("result");
 
+const resultUrl =
+    document.getElementById("resultUrl");
 
-/* =========================
-   PLATFORM DETECTION
-========================= */
+const mediaName =
+    document.getElementById("mediaName");
 
-function detectPlatform(url){
+const mediaIcon =
+    document.getElementById("mediaIcon");
 
-    const value = url.toLowerCase();
+const downloadBtn =
+    document.getElementById("downloadBtn");
 
-    if(
-        value.includes("youtube.com") ||
-        value.includes("youtu.be")
-    ){
-        return {
-            name:"YouTube",
-            icon:"▶️"
-        };
-    }
+const preview =
+    document.getElementById("preview");
 
-    if(
-        value.includes("instagram.com")
-    ){
-        return {
-            name:"Instagram",
-            icon:"📸"
-        };
-    }
+const videoPreview =
+    document.getElementById("videoPreview");
 
-    if(
-        value.includes("facebook.com") ||
-        value.includes("fb.watch")
-    ){
-        return {
-            name:"Facebook",
-            icon:"🔵"
-        };
-    }
+const audioPreview =
+    document.getElementById("audioPreview");
 
-    if(
-        value.includes("tiktok.com")
-    ){
-        return {
-            name:"TikTok",
-            icon:"🎵"
-        };
-    }
+const historyList =
+    document.getElementById("historyList");
 
-    if(
-        value.includes("x.com") ||
-        value.includes("twitter.com")
-    ){
-        return {
-            name:"X",
-            icon:"𝕏"
-        };
-    }
+const clearBtn =
+    document.getElementById("clearBtn");
 
-    return {
-        name:"Unknown website",
-        icon:"🌐"
-    };
-}
+const toast =
+    document.getElementById("toast");
+
+const themeBtn =
+    document.getElementById("themeBtn");
 
 
-/* =========================
+let currentURL = "";
+let currentType = "";
+
+
+/* =========================================
    TOAST
-========================= */
+========================================= */
 
 function showToast(message){
 
@@ -881,104 +946,425 @@ function showToast(message){
 
     toast.classList.add("show");
 
-    setTimeout(()=>{
+    setTimeout(function(){
+
         toast.classList.remove("show");
+
     },3000);
 }
 
 
-/* =========================
-   CHECK URL
-========================= */
+/* =========================================
+   MEDIA TYPE
+========================================= */
 
-checkBtn.addEventListener("click",()=>{
+function getMediaType(url){
 
-    const url = urlInput.value.trim();
+    let clean = url
+        .split("?")[0]
+        .split("#")[0]
+        .toLowerCase();
 
-    if(!url){
-        showToast("Please paste a URL first.");
-        urlInput.focus();
-        return;
+    if(clean.endsWith(".mp4")){
+        return "video";
     }
 
-    let validURL;
+    if(clean.endsWith(".webm")){
+        return "video";
+    }
+
+    if(clean.endsWith(".mov")){
+        return "video";
+    }
+
+    if(clean.endsWith(".m4v")){
+        return "video";
+    }
+
+    if(clean.endsWith(".mp3")){
+        return "audio";
+    }
+
+    if(clean.endsWith(".wav")){
+        return "audio";
+    }
+
+    if(clean.endsWith(".ogg")){
+        return "audio";
+    }
+
+    if(clean.endsWith(".m4a")){
+        return "audio";
+    }
+
+    if(clean.endsWith(".aac")){
+        return "audio";
+    }
+
+    return "unknown";
+}
+
+
+/* =========================================
+   FILE NAME
+========================================= */
+
+function getFileName(url){
 
     try{
-        validURL = new URL(url);
+
+        const parsed =
+            new URL(url);
+
+        let name =
+            parsed.pathname.split("/").pop();
+
+        if(!name){
+            return "media-file";
+        }
+
+        try{
+            name = decodeURIComponent(name);
+        }catch(e){}
+
+        return name;
+
     }catch{
-        showToast("Please enter a valid URL.");
+
+        return "media-file";
+
+    }
+}
+
+
+/* =========================================
+   URL VALIDATION
+========================================= */
+
+function validURL(value){
+
+    try{
+
+        const parsed =
+            new URL(value);
+
+        return (
+            parsed.protocol === "http:" ||
+            parsed.protocol === "https:"
+        );
+
+    }catch{
+
+        return false;
+
+    }
+}
+
+
+/* =========================================
+   CHECK URL
+========================================= */
+
+checkBtn.addEventListener("click", async function(){
+
+    const url =
+        urlInput.value.trim();
+
+    if(!url){
+
+        showToast(
+            "Please enter a media URL."
+        );
+
+        urlInput.focus();
+
         return;
     }
 
-    checkBtn.classList.add("loading");
-    checkBtn.disabled = true;
 
-    setTimeout(()=>{
+    if(!validURL(url)){
 
-        const platform = detectPlatform(url);
-
-        result.classList.add("show");
-
-        resultIcon.textContent = platform.icon;
-        resultPlatform.textContent = platform.name;
-        resultUrl.textContent = url;
-
-        platformText.textContent =
-            "Detected platform: " + platform.name;
-
-        saveHistory(url,platform.name);
-
-        checkBtn.classList.remove("loading");
-        checkBtn.disabled = false;
+        statusBox.textContent =
+            "Invalid URL. Please enter an HTTP or HTTPS URL.";
 
         showToast(
-            platform.name === "Unknown website"
-            ? "Website detected."
-            : platform.name + " link detected."
+            "Invalid URL."
         );
 
-    },900);
+        return;
+    }
+
+
+    checkBtn.disabled = true;
+
+    checkBtn.textContent =
+        "Checking...";
+
+    statusBox.textContent =
+        "Checking media URL...";
+
+
+    await new Promise(function(resolve){
+
+        setTimeout(resolve,700);
+
+    });
+
+
+    const type =
+        getMediaType(url);
+
+    currentURL = url;
+    currentType = type;
+
+
+    result.classList.add("show");
+
+    resultUrl.textContent = url;
+
+
+    if(type === "video"){
+
+        mediaIcon.textContent = "🎬";
+
+        mediaName.textContent =
+            "Video file detected";
+
+        videoPreview.src = url;
+
+        audioPreview.removeAttribute("src");
+
+        videoPreview.style.display =
+            "block";
+
+        audioPreview.style.display =
+            "none";
+
+        preview.style.display =
+            "block";
+
+        statusBox.textContent =
+            "Direct video URL detected.";
+
+    }
+
+    else if(type === "audio"){
+
+        mediaIcon.textContent = "🎵";
+
+        mediaName.textContent =
+            "Audio file detected";
+
+        audioPreview.src = url;
+
+        videoPreview.removeAttribute("src");
+
+        audioPreview.style.display =
+            "block";
+
+        videoPreview.style.display =
+            "none";
+
+        preview.style.display =
+            "block";
+
+        statusBox.textContent =
+            "Direct audio URL detected.";
+
+    }
+
+    else{
+
+        mediaIcon.textContent = "📁";
+
+        mediaName.textContent =
+            "Direct media URL";
+
+        videoPreview.removeAttribute("src");
+        audioPreview.removeAttribute("src");
+
+        preview.style.display =
+            "none";
+
+        statusBox.textContent =
+            "URL accepted. Download may depend on the remote server.";
+
+    }
+
+
+    checkBtn.disabled = false;
+
+    checkBtn.textContent =
+        "Check URL";
 
 });
 
 
-/* =========================
-   AUTHORIZED DOWNLOAD
-========================= */
+/* =========================================
+   DOWNLOAD
+========================================= */
 
-authorizedBtn.addEventListener("click",()=>{
+downloadBtn.addEventListener("click", async function(){
 
-    showToast(
-        "Connect your authorized media API/backend here."
-    );
+    if(!currentURL){
 
-    /*
-       BACKEND INTEGRATION PLACEHOLDER
+        showToast(
+            "Check a media URL first."
+        );
 
-       Example:
+        return;
+    }
 
-       fetch("/api/download", {
-           method:"POST",
-           headers:{
-               "Content-Type":"application/json"
-           },
-           body:JSON.stringify({
-               url:urlInput.value
-           })
-       });
 
-       Your backend should only process
-       media that the user is authorized to download.
-    */
+    downloadBtn.disabled = true;
+
+    downloadBtn.textContent =
+        "Preparing...";
+
+
+    try{
+
+        /*
+         * First attempt:
+         * Fetch the direct media resource.
+         *
+         * This works when the remote server permits
+         * browser cross-origin requests.
+         */
+
+        const response =
+            await fetch(currentURL, {
+                method:"GET",
+                mode:"cors"
+            });
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Server returned " +
+                response.status
+            );
+
+        }
+
+
+        const blob =
+            await response.blob();
+
+
+        if(blob.size === 0){
+
+            throw new Error(
+                "Empty media response."
+            );
+
+        }
+
+
+        const blobURL =
+            URL.createObjectURL(blob);
+
+
+        const link =
+            document.createElement("a");
+
+
+        link.href =
+            blobURL;
+
+        link.download =
+            getFileName(currentURL);
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        link.remove();
+
+
+        setTimeout(function(){
+
+            URL.revokeObjectURL(blobURL);
+
+        },5000);
+
+
+        saveHistory(
+            currentURL,
+            currentType
+        );
+
+
+        showToast(
+            "Download started."
+        );
+
+    }
+
+
+    catch(error){
+
+        /*
+         * Fallback:
+         * Ask browser to open the direct media URL.
+         *
+         * This is useful when the remote server blocks
+         * JavaScript fetch/CORS.
+         */
+
+        const link =
+            document.createElement("a");
+
+        link.href =
+            currentURL;
+
+        link.download =
+            getFileName(currentURL);
+
+        link.target =
+            "_blank";
+
+        link.rel =
+            "noopener";
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        link.remove();
+
+
+        saveHistory(
+            currentURL,
+            currentType
+        );
+
+
+        showToast(
+            "Browser download request sent. If it opens the media instead, the remote server does not permit browser downloads."
+        );
+
+    }
+
+
+    finally{
+
+        downloadBtn.disabled = false;
+
+        downloadBtn.textContent =
+            "⬇ Download";
+
+    }
 
 });
 
 
-/* =========================
-   PASTE BUTTON
-========================= */
+/* =========================================
+   PASTE
+========================================= */
 
-pasteBtn.addEventListener("click",async()=>{
+pasteBtn.addEventListener("click", async function(){
 
     try{
 
@@ -986,20 +1372,26 @@ pasteBtn.addEventListener("click",async()=>{
             await navigator.clipboard.readText();
 
         if(!text){
-            showToast("Clipboard is empty.");
+
+            showToast(
+                "Clipboard is empty."
+            );
+
             return;
         }
 
         urlInput.value = text;
 
-        showToast("URL pasted.");
+        showToast(
+            "URL pasted."
+        );
 
-        urlInput.focus();
+    }
 
-    }catch{
+    catch{
 
         showToast(
-            "Clipboard access is unavailable. Paste manually."
+            "Clipboard access blocked. Paste manually."
         );
 
     }
@@ -1007,54 +1399,80 @@ pasteBtn.addEventListener("click",async()=>{
 });
 
 
-/* =========================
-   ENTER KEY
-========================= */
+/* =========================================
+   ENTER
+========================================= */
 
-urlInput.addEventListener("keydown",(event)=>{
+urlInput.addEventListener(
+    "keydown",
+    function(event){
 
-    if(event.key === "Enter"){
-        checkBtn.click();
+        if(event.key === "Enter"){
+
+            checkBtn.click();
+
+        }
+
     }
+);
 
-});
 
-
-/* =========================
+/* =========================================
    HISTORY
-========================= */
+========================================= */
 
 function getHistory(){
 
     try{
+
         return JSON.parse(
-            localStorage.getItem("mediaDropHistory")
+            localStorage.getItem(
+                "mediaDropHistory"
+            )
         ) || [];
+
     }catch{
+
         return [];
+
     }
 
 }
 
 
-function saveHistory(url,platform){
+function saveHistory(url,type){
 
-    let history = getHistory();
+    let history =
+        getHistory();
 
-    history = history.filter(item => item.url !== url);
+
+    history =
+        history.filter(
+            item => item.url !== url
+        );
+
 
     history.unshift({
+
         url:url,
-        platform:platform,
-        time:new Date().toLocaleString()
+
+        type:type,
+
+        time:
+            new Date().toLocaleString()
+
     });
 
-    history = history.slice(0,8);
+
+    history =
+        history.slice(0,10);
+
 
     localStorage.setItem(
         "mediaDropHistory",
         JSON.stringify(history)
     );
+
 
     renderHistory();
 
@@ -1063,65 +1481,124 @@ function saveHistory(url,platform){
 
 function renderHistory(){
 
-    const history = getHistory();
+    const history =
+        getHistory();
+
 
     historyList.innerHTML = "";
+
 
     if(history.length === 0){
 
         historyList.innerHTML = `
             <div style="
-                padding:25px;
+                padding:28px;
                 text-align:center;
                 color:var(--muted);
+                font-size:14px;
             ">
-                No recent URLs
+                No download history yet.
             </div>
         `;
 
         return;
+
     }
 
-    history.forEach(item=>{
 
-        const div = document.createElement("div");
+    history.forEach(function(item){
 
-        div.className = "history-item";
+        const row =
+            document.createElement("div");
 
-        div.innerHTML = `
-            <div>🔗</div>
+        row.className =
+            "history-item";
 
-            <div class="url">
-                <strong>${escapeHTML(item.platform)}</strong><br>
-                <span>${escapeHTML(item.url)}</span>
+
+        const icon =
+            item.type === "audio"
+            ? "🎵"
+            : item.type === "video"
+            ? "🎬"
+            : "📁";
+
+
+        row.innerHTML = `
+
+            <div style="font-size:22px">
+                ${icon}
+            </div>
+
+            <div class="info">
+
+                <strong>
+                    ${escapeHTML(
+                        item.type === "audio"
+                        ? "Audio"
+                        : item.type === "video"
+                        ? "Video"
+                        : "Media"
+                    )}
+                </strong>
+
+                <span class="link">
+                    ${escapeHTML(item.url)}
+                </span>
+
             </div>
 
             <small>
                 ${escapeHTML(item.time)}
             </small>
+
         `;
 
-        historyList.appendChild(div);
+
+        row.addEventListener(
+            "click",
+            function(){
+
+                urlInput.value =
+                    item.url;
+
+                window.scrollTo({
+                    top:0,
+                    behavior:"smooth"
+                });
+
+            }
+        );
+
+
+        row.style.cursor =
+            "pointer";
+
+
+        historyList.appendChild(row);
 
     });
 
 }
 
 
-clearBtn.addEventListener("click",()=>{
+clearBtn.addEventListener("click",function(){
 
-    localStorage.removeItem("mediaDropHistory");
+    localStorage.removeItem(
+        "mediaDropHistory"
+    );
 
     renderHistory();
 
-    showToast("History cleared.");
+    showToast(
+        "History cleared."
+    );
 
 });
 
 
-/* =========================
+/* =========================================
    HTML ESCAPE
-========================= */
+========================================= */
 
 function escapeHTML(value){
 
@@ -1135,37 +1612,48 @@ function escapeHTML(value){
 }
 
 
-/* =========================
+/* =========================================
    DARK MODE
-========================= */
+========================================= */
 
 function loadTheme(){
 
-    const theme =
-        localStorage.getItem("mediaDropTheme");
+    const saved =
+        localStorage.getItem(
+            "mediaDropTheme"
+        );
 
-    if(theme === "dark"){
 
-        document.body.classList.add("dark");
+    if(saved === "dark"){
 
-        themeBtn.textContent = "☀️";
+        document.body.classList.add(
+            "dark"
+        );
+
+        themeBtn.textContent =
+            "☀️";
 
     }
 
 }
 
 
-themeBtn.addEventListener("click",()=>{
+themeBtn.addEventListener("click",function(){
 
     document.body.classList.toggle("dark");
 
+
     const dark =
-        document.body.classList.contains("dark");
+        document.body.classList.contains(
+            "dark"
+        );
+
 
     localStorage.setItem(
         "mediaDropTheme",
         dark ? "dark" : "light"
     );
+
 
     themeBtn.textContent =
         dark ? "☀️" : "🌙";
@@ -1173,11 +1661,12 @@ themeBtn.addEventListener("click",()=>{
 });
 
 
-/* =========================
+/* =========================================
    INITIALIZE
-========================= */
+========================================= */
 
 loadTheme();
+
 renderHistory();
 
 </script>
